@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello ATBT CI')
 })
 
 app.post('/add',Test.Add_Admin)
