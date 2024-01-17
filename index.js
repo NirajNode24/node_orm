@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 
 
 app.get('/', (req, res) => {
-  res.send('Hello ATBT CI')
+  res.send('ATBT BackEnd ')
 })
 
 app.post('/add',Test.Add_Admin)
