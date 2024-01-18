@@ -18,8 +18,9 @@ app.use(bodyParser.json())
 app.use('/admin', Admin_router);
 app.use('/entite', Entite_router);
 
-
-
+app.get('/', (req, res) => {
+  res.send('ATBT')
+})
 
 
 app.listen(port, () => {
