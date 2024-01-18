@@ -19,7 +19,7 @@ app.use('/admin', Admin_router);
 app.use('/entite', Entite_router);
 
 app.get('/', (req, res) => {
-  res.send('ATBT main')
+  res.send('ATBT DEV')
 })
 
 
