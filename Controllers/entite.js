@@ -6,8 +6,8 @@ const Add_Entite = async (req, res) => {
     try {
       var data =(req.body)
       console.log(data)
-      const admin = await Entite.create(data);
-      res.status(201).json({ message: " created successfully", admin });
+      const Entites = await Entite.create(data);
+      res.status(201).json({ message: " created successfully", Entites });
     } catch (error) {
       // Handle any errors that occur during the Admin creation process
       console.error("Error creating admin:", error);
@@ -17,8 +17,8 @@ const Add_Entite = async (req, res) => {
   const List_Entite = async (req, res) => {
     try {
       // Create an Admin with the given data
-      const admin = await Entite.findAll();
-      res.status(200).json({admin });
+      const Entites = await Entite.findAll();
+      res.status(200).json({Entites });
     } catch (error) {
       // Handle any errors that occur during the Admin creation process
       console.error("Error creating admin:", error);
@@ -29,13 +29,13 @@ const Add_Entite = async (req, res) => {
   const Get_Entite = async (req, res) => {
     try {
       // Create an Admin with the given data
-      const admin = await Entite.findOne({ where: {
+      const Entites = await Entite.findOne({ where: {
         id : req.params.id
       }});
-      res.status(200).json({ message: `your id is:${req.params.id}`, admin });
+      res.status(200).json({ message: `your id is:${req.params.id}`,Entites });
     } catch (error) {
       // Handle any errors that occur during the Admin creation process
-      console.error("Error creating admin:", error);
+      console.error("Error creating :", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
@@ -62,7 +62,7 @@ const Add_Entite = async (req, res) => {
   
       res.status(200).json({ message: `deleted successfully ${req.params.id}` });
     } catch (error) {
-      console.error("Error deleting admin:", error);
+      console.error("Error deleting:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
