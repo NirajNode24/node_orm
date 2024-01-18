@@ -10,7 +10,9 @@ module.exports =(sequelize,DataTypes)=>{
           // allowNull defaults to true
         },
         Member: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true
+
             // allowNull defaults to true
           }
       }, {

@@ -1,27 +1,25 @@
 const express = require('express')
 var bodyParser = require('body-parser')
-
 require('./models')
-const Test =  require('./Controllers/test')
+const cors = require('cors')
+
+const Admin_router = require('./Routes/Admin')
+const Entite_router = require('./Routes/Entite')
 const app = express()
 const port = 3000
 
 // middel ware
 // parse application/x-www-form-urlencoded
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+app.use('/admin', Admin_router);
+app.use('/entite', Entite_router);
 
-app.get('/', (req, res) => {
-  res.send('ATBT BackEnd ')
-})
 
-app.post('/add',Test.Add_Admin)
-app.get('/list',Test.List_Admin)
-app.get('/list/:id',Test.Get_Admin)
-app.put('/update/:id',Test.Update_Admin)
-app.delete('/delete/:id',Test.Delete_Admin)
+
 
 
 app.listen(port, () => {
