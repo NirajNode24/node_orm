@@ -46,7 +46,7 @@ const Add_Entite = async (req, res) => {
        await Entite.update(data, {
         where: { id: req.params.id}
       });
-      res.status(200).json({ message: 'updated successfully ${req.params.id}` });
+      res.status(200).json({ message: `updated successfully ${req.params.id}` });
     } catch (error) {
       // Handle any errors that occur during the Admin creation process
       console.error("Error creating admin:", error);
