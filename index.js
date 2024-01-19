@@ -1,3 +1,4 @@
+const emailRoute = require('./mail/mail')
 const express = require('express')
 var bodyParser = require('body-parser')
 require('./models')
@@ -17,6 +18,9 @@ app.use(bodyParser.json())
 
 app.use('/admin', Admin_router);
 app.use('/entite', Entite_router);
+// Include the email sending route
+app.use('/api', emailRoute);
+//   export files
 
 app.get('/', (req, res) => {
   res.send('ATBT DEV')
