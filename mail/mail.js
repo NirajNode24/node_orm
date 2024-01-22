@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const router = express.Router();
 
 router.post('/send-email', (req, res) => {
-  var send_to =req.query.email;
+  var send_to = req.query.email;
   const { to, subject, text, html } = req.body;
 
   const transporter = nodemailer.createTransport({
@@ -30,7 +30,7 @@ router.post('/send-email', (req, res) => {
       res.status(500).json({ error: err.message });
     else
       // res.json({ message: 'Email sent successfully! ${send_to}', info: info });
-      res.json({ message: `mail send to you repected mail ${send_to}`});
+      res.json({ message: `mail send to you repected mail ${send_to}` });
   });
 });
 

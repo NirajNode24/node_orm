@@ -1,11 +1,14 @@
-const emailRoute = require('./mail/mail')
 const express = require('express')
 var bodyParser = require('body-parser')
 require('./models')
 const cors = require('cors')
-
 const Admin_router = require('./Routes/Admin')
 const Entite_router = require('./Routes/Entite')
+const emailRoute = require('./mail/mail')
+const Auth_router = require('./Routes/Auth')
+const errorHander = require('./middlewares/errorHandler.middleware')
+const routeNotFound = require('./middlewares/routeNotfound.middleware')
+const authVerify = require('./middlewares/authVerify.middleware')
 const app = express()
 const port = 3000
 
@@ -16,16 +19,18 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use('/admin', Admin_router);
+app.use('/admin', authVerify, Admin_router);
 app.use('/entite', Entite_router);
-// Include the email sending route
 app.use('/api', emailRoute);
-//   export files
+app.use('/auth', Auth_router)
 
 app.get('/', (req, res) => {
-  res.send('ATBT DEV')
+  res.send('ATBT D1')
 })
 
+
+app.use(errorHander);
+app.use(routeNotFound);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
