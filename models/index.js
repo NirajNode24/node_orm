@@ -15,6 +15,6 @@ db.User = require('./User_model')(sequelize, DataTypes)
 
 
 
-db.sequelize.sync({ force: false });
+db.sequelize.sync({ alter: true});
 console.log("All models were synchronized successfully.");
 module.exports = db;

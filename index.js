@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use('/admin', authVerify, Admin_router);
+app.use('/admin', Admin_router);
 app.use('/entite', Entite_router);
 app.use('/api', emailRoute);
 app.use('/auth', Auth_router)
