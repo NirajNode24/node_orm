@@ -25,7 +25,7 @@ app.use('/api', emailRoute);
 app.use('/auth', Auth_router)
 
 app.get('/', (req, res) => {
-  res.send('ATBT D1')
+  res.send('good to go')
 })
 
 
