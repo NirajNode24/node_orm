@@ -11,6 +11,9 @@ db.sequelize = sequelize
 db.Admin = require('./Admin_model')(sequelize, DataTypes)
 db.Entite = require('./Entite_model')(sequelize, DataTypes)
 db.User = require('./User_model')(sequelize, DataTypes)
+// db.EntiteForom = require('./CustomFrom')(sequelize, DataTypes)
+
+
 
 db.sequelize.sync({ force: false });
 console.log("All models were synchronized successfully.");

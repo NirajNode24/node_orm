@@ -1,19 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
   const Entite = sequelize.define('Entite', {
-    // Model attributes are defined here
     Entite_Name: {
       type: DataTypes.STRING,
       allowNull: false
     },
     Description: {
       type: DataTypes.STRING
-      // allowNull defaults to true
     },
     Member: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true
-
-      // allowNull defaults to true
+    },
+    EntityPhoto: {
+      type: DataTypes.BLOB('long'), // or use DataTypes.BLOB if you don't need a specific length
+      allowNull: true
     }
   }, {
     // Other model options go here
@@ -22,4 +22,4 @@ module.exports = (sequelize, DataTypes) => {
     Entite.belongsToMany(models.User, { through: 'UserEntite' });
   };
   return Entite;
-}
+};
