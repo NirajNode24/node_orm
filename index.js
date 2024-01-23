@@ -32,7 +32,7 @@ app.use('/form', Form_router)
 
 // Home page 
 app.get('/', (req, res) => {
-  res.send("API")
+  res.send("API M")
 
 })
 
