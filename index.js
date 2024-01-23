@@ -31,7 +31,7 @@ app.use('/user', User_router)
 
 // Home page 
 app.get('/', (req, res) => {
-  res.send("API new")
+  res.send("API E")
 
 })
 
