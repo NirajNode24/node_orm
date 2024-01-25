@@ -26,7 +26,7 @@ app.use('/api', emailRoute);
 app.use('/auth', Auth_router)
 
 app.get('/', (req, res) => {
-  res.send('ATBT main online')
+  res.send('ATBT online')
 })
 
 
