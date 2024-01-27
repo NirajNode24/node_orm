@@ -29,7 +29,7 @@ app.use('/auth', Auth_router)
 app.use('/saveArray', setting_router)
 
 app.get('/', (req, res) => {
-  res.send('ATBT online')
+  res.send('ATBT 27')
 })
 
 
