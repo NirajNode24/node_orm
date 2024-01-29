@@ -26,7 +26,7 @@ const Add_data= async (req, res) => {
         }
         const serializedData = JSON.stringify(arrayOfObjects);
         const data = await Settings.create({ Data: serializedData });
-    
+        console.log(data)
         res.json({ message: 'Array of objects saved successfully.',data});
       } catch (error) {
         console.error('Error saving array of objects:', error);
