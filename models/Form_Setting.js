@@ -3,6 +3,10 @@ module.exports = (sequelize, DataTypes) => {
       Data: {
         type: DataTypes.TEXT,
         allowNull: true
+      },
+      Name: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     }, {
       // Other model options go here

@@ -26,8 +26,7 @@ app.use('/admin', Admin_router);
 app.use('/entite', Entite_router);
 app.use('/api', emailRoute);
 app.use('/auth', Auth_router)
-app.use('/form', setting_router)
-
+app.use('/saveArray', setting_router)
 
 app.get('/', (req, res) => {
   res.send('ATBT 27')
