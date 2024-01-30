@@ -4,7 +4,7 @@ require('./models')
 const cors = require('cors')
 const Admin_router = require('./Routes/Admin')
 const setting_router = require('./Routes/Form_setting')
-const Entite_router = require('./Routes/Entite')
+const Entite_router = require('./Routes/Entity')
 const emailRoute = require('./mail/mail')
 const Auth_router = require('./Routes/Auth')
 const errorHander = require('./middlewares/errorHandler.middleware')
@@ -23,7 +23,7 @@ app.use(bodyParser.json())
 
 // app.use('/admin', authVerify, Admin_router);
 app.use('/admin', Admin_router);
-app.use('/entite', Entite_router);
+app.use('/entity', Entite_router);
 app.use('/api', emailRoute);
 app.use('/auth', Auth_router)
 app.use('/form', setting_router)

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ECont = require('../Controllers/entite')
+const ECont = require('../Controllers/entity')
 
 
 
