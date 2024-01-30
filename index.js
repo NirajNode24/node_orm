@@ -29,7 +29,7 @@ app.use('/auth', Auth_router)
 app.use('/form', setting_router)
 
 app.get('/', (req, res) => {
-  res.send('ATBT 30')
+  res.send('ATBT 3.0')
 })
 
 
