@@ -6,7 +6,9 @@ const Form_setting = require('../Controllers/forms')
 
 // Define a route for a specific resource
 
-router.post('/',Form_setting.Add_data)
+router.post('/add',Form_setting.Add_data)
 router.get('/list',Form_setting.GetAllLIST)
+router.put('/update',Form_setting.Update_data)
+
 
 module.exports = router;
