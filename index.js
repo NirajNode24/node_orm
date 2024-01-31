@@ -1,5 +1,6 @@
 const express = require('express')
 var bodyParser = require('body-parser')
+const multer = require('multer');
 require('./models')
 const cors = require('cors')
 const Admin_router = require('./Routes/Admin')
@@ -10,6 +11,7 @@ const Auth_router = require('./Routes/Auth')
 const errorHander = require('./middlewares/errorHandler.middleware')
 const routeNotFound = require('./middlewares/routeNotfound.middleware')
 const authVerify = require('./middlewares/authVerify.middleware')
+const storage = require('./utils/multer')
 
 const app = express()
 const port = 3000
@@ -29,8 +31,9 @@ app.use('/auth', Auth_router)
 app.use('/form', setting_router)
 
 app.get('/', (req, res) => {
-  res.send('ATBT 3.0')
+  res.send('ATBT 3.1')
 })
+
 
 
 app.use(errorHander);

@@ -30,7 +30,7 @@ const Entity = sequelize.define('Entity', {
       allowNull: true,
     },
     Image: {
-      type: DataTypes.STRING,
+      type: DataTypes.BLOB,
       allowNull: true,
     },
     Radio: {

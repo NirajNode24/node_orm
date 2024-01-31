@@ -1,13 +1,17 @@
 var db = require('../models/index');
+const multer  = require('multer');
 const Entite = db.Entite;
+const storage = require('../utils/multer')
 
 
 const Add_Entite = async (req, res) => {
     try {
-      var data =(req.body)
-      console.log(data)
-      const Entites = await Entite.create(data);
-      res.status(201).json({ message: " created successfully", Entites });
+      // var data =(req.body)
+      console.log(req.body)
+      // var upload = multer({ storage: storage });
+      // upload = upload.single(image)
+      // const Entites = await Entite.create(data);
+      res.status(201).json({ message: " created successfully", });
     } catch (error) {
       // Handle any errors that occur during the Admin creation process
       console.error("Error creating admin:", error);
