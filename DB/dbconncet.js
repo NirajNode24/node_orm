@@ -1,9 +1,9 @@
 const { Sequelize } = require('sequelize');
 
 
-const sequelize = new Sequelize('ATBT_test', 'postgres', 'rootadmin', {
-    host: 'localhost',
-    dialect: 'postgres',
+const sequelize = new Sequelize('ATBT_test', 'rootadmin', 'rootadmin', {
+    host: 'atbt-db.cwuyjszxxfxc.us-east-1.rds.amazonaws.com',
+    dialect: 'mysql',
     logging: false
   });
 
