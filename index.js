@@ -1,5 +1,8 @@
 const express = require('express')
 var bodyParser = require('body-parser')
+const multer  = require('multer');
+
+
 require('./models')
 const cors = require('cors')
 const Admin_router = require('./Routes/Admin')
@@ -28,9 +31,29 @@ app.use('/api', emailRoute);
 app.use('/auth', Auth_router)
 app.use('/form', setting_router)
 
+
+// Route to handle file upload
+
 app.get('/', (req, res) => {
   res.send('ATBT 3.1')
 })
+const storage = require('./utils/store')
+const upload = multer({
+  storage: storage,
+  limits: {
+      fileSize: 1000000
+  }
+})
+app.use('/profile', express.static('Public/Images'));
+
+app.post('/upload', upload.single('image'), (req, res) => {
+  console.log(req.file)
+  res.status(200).json({
+    success: 1,
+    profile_url: `http://localhost:3001/profile/${req.file.filename}`
+})
+});
+
 
 
 app.use(errorHander);
