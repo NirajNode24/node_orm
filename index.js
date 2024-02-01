@@ -50,7 +50,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
   console.log(req.file)
   res.status(200).json({
     success: 1,
-    profile_url: `http://localhost:3001/profile/${req.file.filename}`
+    profile_url: `https://atbtmain.teksacademy.com/profile/${req.file.filename}`
 })
 });
 
