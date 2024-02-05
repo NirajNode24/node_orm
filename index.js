@@ -15,7 +15,7 @@ const routeNotFound = require('./middlewares/routeNotfound.middleware')
 const authVerify = require('./middlewares/authVerify.middleware')
 
 const app = express()
-const port = 3000
+const port = 3001
 
 // middel ware
 // parse application/x-www-form-urlencoded

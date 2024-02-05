@@ -17,6 +17,6 @@ db.From_data = require('./Form_Setting')(sequelize, DataTypes)
 
 
 
-db.sequelize.sync();
+db.sequelize.sync({alter:true});
 console.log("All models were sync successfully.");
 module.exports = db;
