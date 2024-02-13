@@ -6,11 +6,10 @@ const ECont = require('../Controllers/entity')
 
 // Define a route for a specific resource
 
-router.post('/add',ECont.Add_Entite)
-router.get('/list',ECont.List_Entite)
-router.get('/list/:id',ECont.Get_Entite)
-router.put('/update/:id',ECont.Update_Entite)
-router.delete('/delete/:id',ECont.Delete_Entite)
-
+router.post('/data', ECont.createEntityData);
+router.get('/data/:id', ECont.getEntityDataById);
+router.put('/data/:id', ECont.updateEntityDataById);
+router.delete('/data/:id', ECont.deleteEntityDataById);
+router.get('/', ECont.EntityDataList);
 
 module.exports = router;

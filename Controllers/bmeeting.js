@@ -1,11 +1,11 @@
 
 const mycon = require('../DB/mydb')
 
-const createUserData = (req, res) => {
+const createBMeetingData = (req, res) => {
     const data = req.body;
     console.log(data)
-    // Insert data into the Userdata table
-    mycon.query('INSERT INTO UsersData SET ?', data, (err, result) => {
+    // Insert data into the BMeetingdata table
+    mycon.query('INSERT INTO BMeetData SET ?', data, (err, result) => {
       if (err) {
       
         console.error('Error inserting data: ' + err.stack);
@@ -19,11 +19,11 @@ const createUserData = (req, res) => {
     });
   };
   
-  const getUserDataById = (req, res) => {
-    const UserId = req.params.id;
-    console.log(UserId)
-    // Retrieve data from the Userdata table based on the id
-    mycon.query('SELECT * FROM UsersData WHERE id = ?', UserId, (err, result) => {
+  const getBMeetingDataById = (req, res) => {
+    const BMeetingId = req.params.id;
+    console.log(BMeetingId)
+    // Retrieve data from the BMeetingdata table based on the id
+    mycon.query('SELECT * FROM BMeetData WHERE id = ?', BMeetingId, (err, result) => {
       if (err) {
         console.error('Error retrieving data: ' + err.stack);
         res.status(500).send('Error retrieving data');
@@ -31,7 +31,7 @@ const createUserData = (req, res) => {
       }
   
       if (result.length === 0) {
-        res.status(404).send('User data not found');
+        res.status(404).send('BMeeting data not found');
         return;
       }
   
@@ -39,11 +39,11 @@ const createUserData = (req, res) => {
     });
   };
   
-  const updateUserDataById = (req, res) => {
-    const UserId = req.params.id;
+  const updateBMeetingDataById = (req, res) => {
+    const BMeetingId = req.params.id;
     const newData = req.body;
-    // Update data in the Userdata table based on the id
-    mycon.query('UPDATE UsersData SET ? WHERE id = ?', [newData, UserId], (err, result) => {
+    // Update data in the BMeetingdata table based on the id
+    mycon.query('UPDATE BMeetData SET ? WHERE id = ?', [newData, BMeetingId], (err, result) => {
       if (err) {
         console.error('Error updating data: ' + err.stack);
         res.status(500).send('Error updating data');
@@ -51,7 +51,7 @@ const createUserData = (req, res) => {
       }
   
       if (result.affectedRows === 0) {
-        res.status(404).send('User data not found');
+        res.status(404).send('BMeeting data not found');
         return;
       }
   
@@ -60,10 +60,10 @@ const createUserData = (req, res) => {
     });
   };
   
-  const deleteUserDataById = (req, res) => {
-    const UserId = req.params.id;
-    // Delete data from the Userdata table based on the id
-    mycon.query('DELETE FROM UsersData WHERE id = ?', UserId, (err, result) => {
+  const deleteBMeetingDataById = (req, res) => {
+    const BMeetingId = req.params.id;
+    // Delete data from the BMeetingdata table based on the id
+    mycon.query('DELETE FROM BMeetData WHERE id = ?', BMeetingId, (err, result) => {
       if (err) {
         console.error('Error deleting data: ' + err.stack);
         res.status(500).send('Error deleting data');
@@ -71,7 +71,7 @@ const createUserData = (req, res) => {
       }
   
       if (result.affectedRows === 0) {
-        res.status(404).send('User data not found');
+        res.status(404).send('BMeeting data not found');
         return;
       }
   
@@ -80,8 +80,8 @@ const createUserData = (req, res) => {
     });
   };
   
-  const UserDataList = (req, res) => {
-    mycon.query('SELECT * FROM UsersData', (err, result) => {
+  const BMeetingDataList = (req, res) => {
+    mycon.query('SELECT * FROM BMeetData', (err, result) => {
       if (err) {
         console.error('Error retrieving data: ' + err.stack);
         res.status(500).send('Error retrieving data');
@@ -93,4 +93,4 @@ const createUserData = (req, res) => {
   
   
    
-  module.exports = {deleteUserDataById,updateUserDataById,getUserDataById,createUserData,UserDataList}
+  module.exports = {deleteBMeetingDataById,updateBMeetingDataById,getBMeetingDataById,createBMeetingData,BMeetingDataList}

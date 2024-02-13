@@ -1,5 +1,7 @@
 var db = require('../models/index.js')
 const Settings = db.From_data;
+const { DataTypes } = require('sequelize');
+const sequelize = require('../DB/dbconncet');
 
 
 
@@ -132,6 +134,414 @@ const Update_data = async (req, res) => {
 };
 
 
+// const FinalForm = async (req, res) => {
+//     let formData = req.body.arrayOfObjects;
+//     let finalJson = {};
+//     for (let i = 0; i < formData.length; i++) {
+//         if (formData[i].type === "text" || formData[i].type === "email" || formData[i].type === "password" || formData[i].type === "select" || formData[i].type === "range") {
 
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.STRING,
+//                 allowNull: true
+//             };
+//         }
+//         if (formData[i].type === "textarea") {
 
-module.exports = { Add_data,GetAllLIST,Update_data }
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.TEXT,
+//                 allowNull: true
+//             };
+//         }
+//         if (formData[i].type === "checkbox") {
+
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.BOOLEAN,
+//                 allowNull: true
+//             };
+//         }
+//         if (formData[i].type === "number") {
+
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.INTEGER,
+//                 allowNull: true
+//             };
+//         }
+//         if (formData[i].type === "date") {
+
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.DATEONLY,
+//                 allowNull: true
+//             };
+//         }
+//         if (formData[i].type === "time") {
+
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.TIME,
+//                 allowNull: true
+//             };
+//         }
+//         if (formData[i].type === "file") {
+
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.BLOB,
+//                 allowNull: true
+//             };
+//         }
+//         if (Array.isArray(formData[i].value)) {
+
+//             finalJson[formData[i].inputname] = {
+//                 type: DataTypes.JSON,
+//                 allowNull: true
+//             };
+//         }
+
+//     }
+    
+//     const EntityData = sequelize.define('EntityData', finalJson);
+//     EntityData.sync({alter:true})
+//     res.status(201).json({ message: "Entity created or modified successfully" });
+//   };
+const EntityForm = async (req, res) => {
+  try {
+      let formData = req.body.arrayOfObjects;
+      let finalJson = {};
+
+      for (let i = 0; i < formData.length; i++) {
+          switch (formData[i].type) {
+              case "text":
+              case "email":
+              case "password":
+              case "select":
+              case "range":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.STRING,
+                      allowNull: true
+                  };
+                  break;
+              case "textarea":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TEXT,
+                      allowNull: true
+                  };
+                  break;
+              case "checkbox":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BOOLEAN,
+                      allowNull: true
+                  };
+                  break;
+              case "number":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.INTEGER,
+                      allowNull: true
+                  };
+                  break;
+              case "date":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.DATEONLY,
+                      allowNull: true
+                  };
+                  break;
+              case "time":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TIME,
+                      allowNull: true
+                  };
+                  break;
+              case "file":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BLOB,
+                      allowNull: true
+                  };
+                  break;
+              default:
+                  if (Array.isArray(formData[i].value)) {
+                      finalJson[formData[i].inputname] = {
+                          type: DataTypes.JSON,
+                          allowNull: true
+                      };
+                  }
+          }
+      }
+    finalJson.customFieldsData = {
+        type: DataTypes.JSON,
+        allowNull: true
+    };
+    finalJson.loggedInUser= {
+            type: DataTypes.INTEGER,
+            allowNull: true
+                }; 
+
+      // Define your model with timestamps disabled
+      const EntityData = sequelize.define('EntityData', finalJson, {
+          timestamps: false // Disable createdAt and updatedAt
+      });
+
+      // Sync the model with the database
+      await EntityData.sync({ alter: true });
+
+      res.status(201).json({ message: "Entity created or modified successfully" });
+  } catch (error) {
+      console.error("Error in creating or modifying entity:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const UserForm = async (req, res) => {
+  try {
+      let formData = req.body.arrayOfObjects;
+      let finalJson = {};
+
+      for (let i = 0; i < formData.length; i++) {
+          switch (formData[i].type) {
+              case "text":
+              case "email":
+              case "password":
+              case "select":
+              case "range":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.STRING,
+                      allowNull: true
+                  };
+                  break;
+              case "textarea":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TEXT,
+                      allowNull: true
+                  };
+                  break;
+              case "checkbox":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BOOLEAN,
+                      allowNull: true
+                  };
+                  break;
+              case "number":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.INTEGER,
+                      allowNull: true
+                  };
+                  break;
+              case "date":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.DATEONLY,
+                      allowNull: true
+                  };
+                  break;
+              case "time":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TIME,
+                      allowNull: true
+                  };
+                  break;
+              case "file":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BLOB,
+                      allowNull: true
+                  };
+                  break;
+              default:
+                  if (Array.isArray(formData[i].value)) {
+                      finalJson[formData[i].inputname] = {
+                          type: DataTypes.JSON,
+                          allowNull: true
+                      };
+                  }
+          }
+      }
+      finalJson.customFieldsData = {
+        type: DataTypes.JSON,
+        allowNull: true
+    };
+    finalJson.loggedInUser= {
+            type: DataTypes.INTEGER,
+            allowNull: true
+                }; 
+
+      // Define your model with timestamps disabled
+      const EntityData = sequelize.define('UsersData', finalJson, {
+          timestamps: false // Disable createdAt and updatedAt
+      });
+
+      // Sync the model with the database
+      await EntityData.sync({ alter: true });
+
+      res.status(201).json({ message: "User  created or modified successfully" });
+  } catch (error) {
+      console.error("Error in creating or modifying entity:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const BoardForm = async (req, res) => {
+  try {
+      let formData = req.body.arrayOfObjects;
+      let finalJson = {};
+
+      for (let i = 0; i < formData.length; i++) {
+          switch (formData[i].type) {
+              case "text":
+              case "email":
+              case "password":
+              case "select":
+              case "range":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.STRING,
+                      allowNull: true
+                  };
+                  break;
+              case "textarea":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TEXT,
+                      allowNull: true
+                  };
+                  break;
+              case "checkbox":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BOOLEAN,
+                      allowNull: true
+                  };
+                  break;
+              case "number":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.INTEGER,
+                      allowNull: true
+                  };
+                  break;
+              case "date":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.DATEONLY,
+                      allowNull: true
+                  };
+                  break;
+              case "time":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TIME,
+                      allowNull: true
+                  };
+                  break;
+              case "file":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BLOB,
+                      allowNull: true
+                  };
+                  break;
+              default:
+                  if (Array.isArray(formData[i].value)) {
+                      finalJson[formData[i].inputname] = {
+                          type: DataTypes.JSON,
+                          allowNull: true
+                      };
+                  }
+          }
+      }
+      finalJson.customFieldsData = {
+        type: DataTypes.JSON,
+        allowNull: true
+    };
+    finalJson.loggedInUser= {
+            type: DataTypes.INTEGER,
+            allowNull: true
+                }; 
+      // Define your model with timestamps disabled
+      const EntityData = sequelize.define('BMeetData', finalJson, {
+          timestamps: false // Disable createdAt and updatedAt
+      });
+
+      // Sync the model with the database
+      await EntityData.sync({ alter: true });
+
+      res.status(201).json({ message: "Board Meeting created or modified successfully" });
+  } catch (error) {
+      console.error("Error in creating or modifying entity:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const TeamsForm = async (req, res) => {
+  try {
+      let formData = req.body.arrayOfObjects;
+      let finalJson = {};
+
+      for (let i = 0; i < formData.length; i++) {
+          switch (formData[i].type) {
+              case "text":
+              case "email":
+              case "password":
+              case "select":
+              case "range":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.STRING,
+                      allowNull: true
+                  };
+                  break;
+              case "textarea":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TEXT,
+                      allowNull: true
+                  };
+                  break;
+              case "checkbox":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BOOLEAN,
+                      allowNull: true
+                  };
+                  break;
+              case "number":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.INTEGER,
+                      allowNull: true
+                  };
+                  break;
+              case "date":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.DATEONLY,
+                      allowNull: true
+                  };
+                  break;
+              case "time":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.TIME,
+                      allowNull: true
+                  };
+                  break;
+              case "file":
+                  finalJson[formData[i].inputname] = {
+                      type: DataTypes.BLOB,
+                      allowNull: true
+                  };
+                  break;
+              default:
+                  if (Array.isArray(formData[i].value)) {
+                      finalJson[formData[i].inputname] = {
+                          type: DataTypes.JSON,
+                          allowNull: true
+                      };
+                  }
+          }
+      }
+      finalJson.customFieldsData = {
+        type: DataTypes.JSON,
+        allowNull: true
+    };
+    finalJson.loggedInUser= {
+            type: DataTypes.INTEGER,
+            allowNull: true
+                }; 
+      // Define your model with timestamps disabled
+      const EntityData = sequelize.define('TMeetData', finalJson, {
+          timestamps: false // Disable createdAt and updatedAt
+      });
+
+      // Sync the model with the database
+      await EntityData.sync({ alter: true });
+
+      res.status(201).json({ message: "Teem Meeting created or modified successfully" });
+  } catch (error) {
+      console.error("Error in creating or modifying entity:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+ 
+module.exports = { Add_data,GetAllLIST,Update_data,EntityForm,UserForm,BoardForm,TeamsForm}

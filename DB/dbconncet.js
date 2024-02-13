@@ -7,6 +7,12 @@ const sequelize = new Sequelize('ATBT_test', 'rootadmin', 'rootadmin', {
     logging: false
   });
 
+  // const sequelize = new Sequelize('ATBT_test', 'root', 'root123', {
+  //   host: 'localhost',
+  //   dialect: 'mysql',
+  //   logging: false
+  // });  
+
 
   try {
         sequelize.authenticate();

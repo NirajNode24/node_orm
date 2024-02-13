@@ -1,68 +1,97 @@
-var db = require('../models/index');
-const Entite = db.Entite;
 
-const Add_Entite = async (req, res) => {
-    try {
-      data =(req.body)
-      const Entites = await Entite.create(data);
-      res.status(201).json({ message: " created successfully", });
-    } catch (error) {
-      // Handle any errors that occur during the Admin creation process
-      console.error("Error creating admin:", error);
-      res.status(500).json({ error: "Error" });
-    }
-  };
-  const List_Entite = async (req, res) => {
-    try {
-      // Create an Admin with the given data
-      const Entites = await Entite.findAll();
-      res.status(200).json({Entites });
-    } catch (error) {
-      // Handle any errors that occur during the Admin creation process
-      console.error("Error creating admin:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
+const mycon = require('../DB/mydb')
 
-  const Get_Entite = async (req, res) => {
-    try {
-      // Create an Admin with the given data
-      const Entites = await Entite.findOne({ where: {
-        id : req.params.id
-      }});
-      res.status(200).json({ message: `your id is:${req.params.id}`,Entites });
-    } catch (error) {
-      // Handle any errors that occur during the Admin creation process
-      console.error("Error creating :", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
-
-  const Update_Entite = async (req, res) => {
-    try {
-      var data =req.body;
-       await Entite.update(data, {
-        where: { id: req.params.id}
-      });
-      res.status(200).json({ message: `updated successfully ${req.params.id}` });
-    } catch (error) {
-      // Handle any errors that occur during the Admin creation process
-      console.error("Error creating admin:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
-  const Delete_Entite = async (req, res) => {
-    try {
-      await Entite.destroy({
-        where: { id: req.params.id },
-        // truncate: true
-      });
-  
-      res.status(200).json({ message: `deleted successfully ${req.params.id}` });
-    } catch (error) {
-      console.error("Error deleting:", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
+// Controllers
+const createEntityData = (req, res) => {
+  const data = req.body;
+  console.log(data)
+  // Insert data into the entitydata table
+  mycon.query('INSERT INTO EntityData SET ?', data, (err, result) => {
+    if (err) {
     
-  module.exports = { Add_Entite,List_Entite,Update_Entite,Delete_Entite,Get_Entite }
+      console.error('Error inserting data: ' + err.stack);
+      res.status(500).send('Error inserting data');
+      return;
+    }
+
+    const id = result.insertId;
+    // res.status(200).send(`Data inserted successfully with id : ${id}`);
+    res.status(201).send(`${id}`);
+  });
+};
+
+const getEntityDataById = (req, res) => {
+  const entityId = req.params.id;
+  console.log(entityId)
+  // Retrieve data from the entitydata table based on the id
+  mycon.query('SELECT * FROM EntityData WHERE id = ?', entityId, (err, result) => {
+    if (err) {
+      console.error('Error retrieving data: ' + err.stack);
+      res.status(500).send('Error retrieving data');
+      return;
+    }
+
+    if (result.length === 0) {
+      res.status(404).send('Entity data not found');
+      return;
+    }
+
+    res.status(200).json(result[0]);
+  });
+};
+
+const updateEntityDataById = (req, res) => {
+  const entityId = req.params.id;
+  const newData = req.body;
+  // Update data in the entitydata table based on the id
+  mycon.query('UPDATE EntityData SET ? WHERE id = ?', [newData, entityId], (err, result) => {
+    if (err) {
+      console.error('Error updating data: ' + err.stack);
+      res.status(500).send('Error updating data');
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      res.status(404).send('Entity data not found');
+      return;
+    }
+
+    console.log('Updated ' + result.affectedRows + ' row(s)');
+    res.status(200).send('Data updated successfully');
+  });
+};
+
+const deleteEntityDataById = (req, res) => {
+  const entityId = req.params.id;
+  // Delete data from the entitydata table based on the id
+  mycon.query('DELETE FROM EntityData WHERE id = ?', entityId, (err, result) => {
+    if (err) {
+      console.error('Error deleting data: ' + err.stack);
+      res.status(500).send('Error deleting data');
+      return;
+    }
+
+    if (result.affectedRows === 0) {
+      res.status(404).send('Entity data not found');
+      return;
+    }
+
+    console.log('Deleted ' + result.affectedRows + ' row(s)');
+    res.status(200).send('Data deleted successfully');
+  });
+};
+
+const EntityDataList = (req, res) => {
+  mycon.query('SELECT * FROM EntityData', (err, result) => {
+    if (err) {
+      console.error('Error retrieving data: ' + err.stack);
+      res.status(500).send('Error retrieving data');
+      return;
+    }
+    res.status(200).json(result);
+  })
+}
+
+
+ 
+module.exports = {deleteEntityDataById,updateEntityDataById,getEntityDataById,createEntityData,EntityDataList}
