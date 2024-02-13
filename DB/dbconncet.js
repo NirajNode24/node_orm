@@ -1,10 +1,17 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('atbtclg', 'rootadmin', 'rootadmin', {
+
+const sequelize = new Sequelize('ATBT_test', 'rootadmin', 'rootadmin', {
     host: 'atbt-db.cwuyjszxxfxc.us-east-1.rds.amazonaws.com',
     dialect: 'mysql',
     logging: false
   });
+
+  // const sequelize = new Sequelize('ATBT_test', 'root', 'root123', {
+  //   host: 'localhost',
+  //   dialect: 'mysql',
+  //   logging: false
+  // });  
 
 
   try {
